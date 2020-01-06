@@ -7,9 +7,11 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#ifdef INFLUXDB_WITH_BOOST
 #include <boost/lexical_cast.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#endif
 
 namespace influxdb
 {
@@ -73,6 +75,7 @@ void InfluxDB::write(Point&& metric)
   }
 }
 
+#ifdef INFLUXDB_WITH_BOOST
 std::vector<Point> InfluxDB::query(const std::string&  query)
 {
   auto response = mTransport->query(query);
@@ -112,5 +115,6 @@ std::vector<Point> InfluxDB::query(const std::string&  query)
   }
   return points;
 }
+#endif
 
 } // namespace influxdb
