@@ -36,10 +36,8 @@ class InfluxDB
     /// \param metric
     void write(Point&& metric);
 
-#ifdef INFLUXDB_WITH_BOOST
     /// Queries InfluxDB database
     std::vector<Point> query(const std::string& query);
-#endif
 
     /// Flushes metric buffer (this can also happens when buffer is full)
     void flushBuffer();

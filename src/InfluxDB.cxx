@@ -7,6 +7,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+
 #ifdef INFLUXDB_WITH_BOOST
 #include <boost/lexical_cast.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -114,6 +115,11 @@ std::vector<Point> InfluxDB::query(const std::string&  query)
     }
   }
   return points;
+}
+#else
+std::vector<Point> InfluxDB::query(const std::string& /*query*/)
+{
+  throw std::runtime_error("InfluxDB query() requires boost");
 }
 #endif
 
